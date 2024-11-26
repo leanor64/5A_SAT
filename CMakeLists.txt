@@ -40,7 +40,7 @@ else ()
     message(SEND_ERROR "Unknown build type ${CMAKE_BUILD_TYPE}")
 endif ()
 
-set(SOURCES )
+file(GLOB_RECURSE SOURCES ${CMAKE_SOURCE_DIR}/Solver/*.cpp)
 set(TARGETS )
 
 message("generating following targets")
