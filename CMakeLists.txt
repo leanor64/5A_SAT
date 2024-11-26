@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.14)
 include(FetchContent)
-project(gtest_test)
+project(SimpleSatSolver)
 
 # GoogleTest requires at least C++14
 set(CMAKE_CXX_STANDARD 20)

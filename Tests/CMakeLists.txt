@@ -9,6 +9,7 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
 enable_testing()
+include_directories(${TEST_NAME} "${CMAKE_SOURCE_DIR}/Solver")
 file(GLOB TEST_SOURCES ${CMAKE_SOURCE_DIR}/Tests/test_*.cpp)
 foreach (TEST ${TEST_SOURCES})
     get_filename_component(TEST_NAME ${TEST} NAME_WLE)
