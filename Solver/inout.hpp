@@ -50,8 +50,10 @@ namespace sat::inout {
      * @param clauses A range of clauses
      * @return dimacs string
      */
-    template<concepts::typed_range<Clause> R>
+    template<std::ranges::range R>
     std::string to_dimacs(const R &clauses) {
+        static_assert(clause_like<std::ranges::range_value_t<R>>,
+                      "The range you passed to this function does hold elements that are clause like");
         Literal maxLit = 0;
         std::size_t nClauses = 0;
         for (const auto &c: clauses) {

@@ -10,13 +10,42 @@
 #include <vector>
 #include <ostream>
 
+#include "util/concepts.hpp"
 #include "basic_structures.hpp"
 
 namespace sat {
+
+    /**
+     * Concept modeling a clause. A clause is some range of literals, i.e. it must have accessible members
+     * begin() and end() that return an iterator to the first or pas the end elements respectively. For example
+     * std::vector<Literal> satisfies this concept.
+     */
+    template<typename T>
+    concept clause_like = concepts::typed_range<T, Literal>;
+
+    /*
+     * Your implementation of a clause here. If you want to implement unit propagation using counters, then a simple
+     * std::vector<Literal> will do the job. No more implementation to be done her. The rest is handled in the solver.
+     *
+     * If you want to do unit propagation using watch-literals, then you can use the template below.
+     */
+
+
+    /**
+     * @brief Clause class with watch literals.
+     * @details @copybrief
+     * In order for it to model the clause_like concept, you must implement
+     * the begin() and end() member functions. I recommend that you store the Literals in a private member of type
+     * std::vector<Literal>. Then, to implement begin() and end(), you can simply return the iterators returned from
+     * std::vector<Literal>::begin() and end() respectively
+     */
     class Clause {
         // Private members here
     public:
 
+        /**
+         * Default CTor. If you want, you can remove it or adapt it to your needs
+         */
         Clause() = default;
 
         /**
@@ -58,7 +87,7 @@ namespace sat {
 
         /*
          * For your information: The following two functions (begin and end) enable the class Clause to be used in a
-         * range based for-loop (foreach loop)
+         * range based for-loop (foreach loop). This also makes it so that Clause models clause_like
          * Clause c;
          * for (auto literal : c) { ... }
          * If you don't want to use a std::vector as the literal container, you need to change the return type of the
