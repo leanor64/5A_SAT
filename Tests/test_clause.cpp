@@ -10,30 +10,7 @@
 
 #include "util/concepts.hpp"
 #include "Clause.hpp"
-
-
-template<typename T>
-struct Hash{
-    auto operator()(const T& t) const noexcept {
-        using SubT = decltype(t.get());
-        return std::hash<SubT>{}(t.get());
-    }
-};
-
-using LitSet = std::unordered_set<sat::Literal, Hash<sat::Literal>>;
-
-template<sat::concepts::typed_range<sat::Literal> Literals>
-bool setsEqual(const Literals &literals, LitSet gt) {
-    for (const auto &literal : literals) {
-        if (not gt.contains(literal)) {
-            return false;
-        }
-
-        gt.erase(literal);
-    }
-
-    return gt.empty();
-}
+#include "testing_utils.hpp"
 
 
 TEST(clause, clause_empty_ctor) {
@@ -47,7 +24,7 @@ TEST(clause, clause_empty_ctor) {
 TEST(clause, clause_ctor) {
     using namespace sat;
     std::vector<Literal> lits{2, 5, 3, 1, 4};
-    LitSet gt(lits.begin(), lits.end());
+    test::LitSet gt(lits.begin(), lits.end());
     Clause c(lits);
     EXPECT_FALSE(c.isEmpty());
     EXPECT_TRUE(setsEqual(c, gt));
