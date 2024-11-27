@@ -69,6 +69,15 @@ TEST(clause, clause_set_watcher) {
     EXPECT_EQ(c.getWatcherByRank(1), 4);
 }
 
+TEST(clause, watcher_index) {
+    using namespace sat;
+    Clause c({5, 2, 3, 4, 1});
+    c.setWatcher(4, 1);
+    c.setWatcher(2, 0);
+    EXPECT_EQ(c.getWatcherByRank(0), c[c.getIndex(0)]);
+    EXPECT_EQ(c.getWatcherByRank(1), c[c.getIndex(1)]);
+}
+
 #ifndef __RUN_ALL_TESTS__
 
 int main(int argc, char **argv) {

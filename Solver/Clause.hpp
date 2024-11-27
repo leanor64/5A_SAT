@@ -73,6 +73,13 @@ namespace sat {
         short getRank(Literal l) const;
 
         /**
+         * Gets the index of the watcher with the given rank
+         * @param rank rank of the watcher
+         * @return first watcher index if rank is 0, second watcher index otherwise
+         */
+        std::size_t getIndex(short rank) const;
+
+        /**
          * Sets the given literal as watcher
          * @param l Literal to be the new watcher
          * @param watcherNo number of the watcher to be replaced

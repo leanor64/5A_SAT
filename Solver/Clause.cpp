@@ -13,9 +13,14 @@ namespace sat {
     //TODO implementation here
 
     Clause::Clause(std::vector<Literal> literals) {
+
     }
 
     short Clause::getRank(Literal l) const {
+
+    }
+
+    std::size_t Clause::getIndex(short rank) const {
 
     }
 
@@ -43,7 +48,6 @@ namespace sat {
     }
 
     bool Clause::sameLiterals(const Clause &other) const {
-
     }
 
 }
