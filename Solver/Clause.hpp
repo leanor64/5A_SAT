@@ -127,8 +127,6 @@ namespace sat {
          */
          std::size_t size() const;
 
-        friend std::ostream &operator<<(std::ostream &, const Clause &);
-
         /**
          * Whether the other clause contains the same literals (independent of ordering)
          * @param other clause to compare to

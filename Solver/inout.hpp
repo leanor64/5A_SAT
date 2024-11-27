@@ -42,7 +42,7 @@ namespace sat::inout {
      * @param in input stream to read from
      * @return std::pair containing (all clauses of the problem, the number of variables in the problem)
      */
-    auto read_from_dimacs(std::istream &in) -> std::pair<std::vector<Clause>, std::size_t>;
+    auto read_from_dimacs(std::istream &in) -> std::pair<std::vector<std::vector<Literal>>, std::size_t>;
 
     /**
      * Converts a range of clauses to dimacs format
@@ -53,7 +53,7 @@ namespace sat::inout {
     template<std::ranges::range R>
     std::string to_dimacs(const R &clauses) {
         static_assert(clause_like<std::ranges::range_value_t<R>>,
-                      "The range you passed to this function does hold elements that are clause like");
+                      "The range you passed to this function does not hold elements that are clause-like");
         Literal maxLit = 0;
         std::size_t nClauses = 0;
         for (const auto &c: clauses) {
@@ -99,8 +99,24 @@ namespace sat {
 
     /**
      * Ostream operator allowing for easy printing of clauses
+     * @tparam ClauseT clause type
      */
-    std::ostream &operator<<(std::ostream &os, const Clause &c);
+    template<clause_like ClauseT>
+    std::ostream &operator<<(std::ostream &os, const ClauseT &clause) {
+        os << "[";
+        bool first = true;
+        for (const auto &l: clause) {
+            if (!first) {
+                os << ", ";
+            }
+
+            os << l;
+            first = false;
+        }
+
+        os << "]";
+        return os;
+    }
 }
 
 #endif //INOUT_HPP

@@ -42,9 +42,9 @@ namespace sat::inout {
     }
 
 
-    auto read_from_dimacs(std::istream &in) -> std::pair<std::vector<Clause>, std::size_t> {
+    auto read_from_dimacs(std::istream &in) -> std::pair<std::vector<std::vector<Literal>>, std::size_t> {
         std::string line;
-        std::vector<Clause> ret;
+        std::vector<std::vector<Literal>> ret;
         std::size_t numVars = 0;
         std::size_t numClauses = 0;
         while (std::getline(in, line)) {
@@ -102,22 +102,6 @@ namespace sat {
     std::ostream &operator<<(std::ostream &os, sat::Literal l) {
         auto sign = l.sign() < 0 ? "¬" : "";
         os << "Lit " << sign << sat::var(l).get() << " (" << l.get() << ")";
-        return os;
-    }
-
-    std::ostream &operator<<(std::ostream &os, const Clause &c) {
-        os << "[";
-        bool first = true;
-        for (const auto &l: c.literals) {
-            if (!first) {
-                os << ", ";
-            }
-
-            os << l;
-            first = false;
-        }
-
-        os << "]";
         return os;
     }
 }
