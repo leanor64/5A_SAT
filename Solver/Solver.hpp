@@ -50,6 +50,20 @@ namespace sat {
          * @TODO if you want, you can declare additional constructors here
          */
 
+
+        /*
+         * You can design the interface of your solver as you want. You can for example add clauses already in the
+         * constructor. The tests require the addClause method, however.
+         */
+
+        /**
+         * Adds a clause to the solver.
+         * @param clause The clause to add
+         * @return bool true if clause was successfully added, false if clause is empty or unit and violates the current
+         * model
+         */
+        bool addClause(Clause clause);
+
         /**
          * Returns the truth value of the given variable
          * @param x a variable (needs to be contained in the solver)

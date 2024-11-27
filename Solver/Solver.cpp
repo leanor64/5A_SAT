@@ -8,6 +8,9 @@
 
 namespace sat {
     Solver::Solver(unsigned numVariables) {
+
+    bool Solver::addClause(Clause clause) {
+
     }
 
     TruthValue Solver::val(Variable x) const {

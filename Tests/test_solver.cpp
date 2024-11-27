@@ -65,6 +65,42 @@ TEST(solver, satisfied_falsified) {
     EXPECT_FALSE(solver.falsified(pos(3)));
 }
 
+TEST(solver, simple_unit_propagation) {
+    using namespace sat;
+    auto clauses = {Clause({neg(1), pos(0), neg(2)}), Clause({neg(1), pos(1)}), Clause({pos(1), pos(0), neg(2)})};
+    Solver s(3);
+    for (const auto &clause : clauses) {
+        s.addClause(clause);
+    }
+
+    s.assign(pos(1));
+    EXPECT_TRUE(s.unitPropagate()) << "unit propagation failed!";
+}
+
+TEST(solver, unit_propagation_fail) {
+    using namespace sat;
+    auto clauses = {Clause({neg(1), pos(0), neg(2)}), Clause({neg(1), pos(2)}), Clause({neg(0), neg(2)})};
+    Solver s(3);
+    for (const auto &clause : clauses) {
+        s.addClause(clause);
+    }
+
+    s.assign(pos(1));
+    EXPECT_FALSE(s.unitPropagate()) << "unit propagation succeeded but it shouldn't have!";
+}
+
+TEST(solver, unit_propagation_complex) {
+    using namespace sat;
+    auto clauses = {Clause({2, 1, 4}), Clause({2, 5}), Clause({0, 4})};
+    Solver s(3);
+    for (const auto &clause : clauses) {
+        s.addClause(clause);
+    }
+
+    s.assign(pos(0));
+    EXPECT_TRUE(s.unitPropagate()) << "unit propagation failed";
+}
+
 #ifndef __RUN_ALL_TESTS__
 
 int main(int argc, char **argv) {

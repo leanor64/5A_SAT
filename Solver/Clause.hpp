@@ -25,7 +25,10 @@ namespace sat {
 
     /*
      * Your implementation of a clause here. If you want to implement unit propagation using counters, then a simple
-     * std::vector<Literal> will do the job. No more implementation to be done her. The rest is handled in the solver.
+     * std::vector<Literal> will do the job. For example like this:
+     *
+     * using Clause = std::vector<Literal>;
+     * No more implementation to be done her. The rest is handled in the solver.
      *
      * If you want to do unit propagation using watch-literals, then you can use the template below.
      */
