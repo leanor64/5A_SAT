@@ -65,6 +65,12 @@ namespace sat {
         bool addClause(Clause clause);
 
         /**
+         * Returns a reduced set of clauses. Excludes satisfied clauses and removes falsified literals from clauses
+         * @return equivalent set of clauses
+         */
+        auto rebase() const -> std::vector<Clause>;
+
+        /**
          * Returns the truth value of the given variable
          * @param x a variable (needs to be contained in the solver)
          * @return TruthValue of the given variable

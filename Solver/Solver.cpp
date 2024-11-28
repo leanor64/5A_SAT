@@ -16,6 +16,10 @@ namespace sat {
         throw NOT_IMPLEMENTED;
     }
 
+    auto Solver::rebase() const -> std::vector<Clause> {
+        throw NOT_IMPLEMENTED;
+    }
+
     TruthValue Solver::val(Variable x) const {
         throw NOT_IMPLEMENTED;
     }
