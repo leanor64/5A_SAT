@@ -10,6 +10,7 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 include_directories(${TEST_NAME} "${CMAKE_SOURCE_DIR}/Solver")
+add_compile_definitions(__TEST_DATA_DIR__="${CMAKE_SOURCE_DIR}/Tests/problems/")
 file(GLOB TEST_SOURCES ${CMAKE_SOURCE_DIR}/Tests/test_*.cpp)
 foreach (TEST ${TEST_SOURCES})
     get_filename_component(TEST_NAME ${TEST} NAME_WLE)

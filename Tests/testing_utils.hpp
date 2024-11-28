@@ -17,6 +17,18 @@
  * @brief Namespace containing testing helpers
  */
 namespace test {
+
+    struct TestData {
+        static constexpr auto UnitPropagationProblem1 = __TEST_DATA_DIR__ "up1.cnf";
+        static constexpr auto UnitPropagationProblem2 = __TEST_DATA_DIR__ "up2.cnf";
+        static constexpr auto UnitPropagationProblem3 = __TEST_DATA_DIR__ "up3.cnf";
+        static constexpr auto UnitPropagationProblem4 = __TEST_DATA_DIR__ "up4.cnf";
+        static constexpr auto UnitPropagationSolution1 = __TEST_DATA_DIR__ "res1.cnf";
+        static constexpr auto UnitPropagationSolution2 = __TEST_DATA_DIR__ "res2.cnf";
+        static constexpr auto UnitPropagationSolution3 = __TEST_DATA_DIR__ "res3.cnf";
+        static constexpr auto UnitPropagationSolution4 = __TEST_DATA_DIR__ "res4.cnf";
+    };
+
     template<typename T>
     struct Hash {
         auto operator()(const T &t) const noexcept {
