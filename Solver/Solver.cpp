@@ -7,7 +7,7 @@
 #include "Solver.hpp"
 
 namespace sat {
-    Solver::Solver(unsigned numVariables) {
+    Solver::Solver(unsigned numVariables) {}
 
     bool Solver::addClause(Clause clause) {
 
