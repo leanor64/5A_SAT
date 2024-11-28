@@ -82,7 +82,7 @@ TEST(solver, unit_propagation_fail) {
     auto clauses = {Clause({neg(1), pos(0), neg(2)}), Clause({neg(1), pos(2)}), Clause({neg(0), neg(2)})};
     Solver s(3);
     for (const auto &clause : clauses) {
-        s.addClause(clause);
+        ASSERT_TRUE(s.addClause(clause));
     }
 
     s.assign(pos(1));
@@ -91,10 +91,10 @@ TEST(solver, unit_propagation_fail) {
 
 TEST(solver, unit_propagation_complex) {
     using namespace sat;
-    auto clauses = {Clause({2, 1, 4}), Clause({2, 5}), Clause({0, 4})};
+    auto clauses = {Clause({neg(1), pos(0), neg(2)}), Clause({neg(1), pos(2)}), Clause({neg(0), neg(2)})};
     Solver s(3);
     for (const auto &clause : clauses) {
-        s.addClause(clause);
+        ASSERT_TRUE(s.addClause(clause));
     }
 
     s.assign(pos(0));
