@@ -6,8 +6,10 @@
 
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
+#include <algorithm>
 
 #include "Solver.hpp"
+#include "inout.hpp"
 
 TEST(solver, initial_assignment) {
     using namespace sat;
@@ -99,6 +101,35 @@ TEST(solver, unit_propagation_complex) {
 
     s.assign(pos(0));
     EXPECT_TRUE(s.unitPropagate()) << "unit propagation failed";
+}
+
+bool findClause(const sat::Clause &clause, const std::vector<sat::Clause> &clauses) {
+    std::vector literals(clause.begin(), clause.end());
+    std::ranges::sort(literals, {}, [](auto lit) { return lit.get(); });
+    auto res = std::ranges::find_if(clauses, [&literals](const auto &c) {
+        std::vector clauseLits(c.begin(), c.end());
+        std::ranges::sort(clauseLits, {}, [](auto lit) { return lit.get(); });
+        return clauseLits == literals;
+    });
+
+    return res != clauses.end();
+}
+
+TEST(solver, rebase) {
+    using namespace sat;
+    Solver s(3);
+    auto clauses = {Clause({neg(1), pos(0), neg(2)}), Clause({neg(1), pos(2)}), Clause({neg(0), neg(2)})};
+    for (const auto &clause : clauses) {
+        ASSERT_TRUE(s.addClause(clause));
+    }
+
+    ASSERT_TRUE(s.assign(pos(0)));
+    const auto rebased = s.rebase();
+    EXPECT_EQ(rebased.size(), 3);
+    EXPECT_TRUE(findClause(Clause({pos(0)}), rebased)) << "Clause " << Clause({pos(0)}) << " was not found";
+    EXPECT_TRUE(findClause(Clause({neg(2)}), rebased)) << "Clause " << Clause({neg(2)}) << " was not found";
+    EXPECT_TRUE(findClause(Clause({neg(1), pos(2)}), rebased))
+        << "Clause " << Clause({neg(1), pos(2)}) << " was not found";
 }
 
 #ifndef __RUN_ALL_TESTS__
