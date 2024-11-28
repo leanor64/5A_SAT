@@ -11,6 +11,7 @@
 
 #include "util/concepts.hpp"
 #include "basic_structures.hpp"
+#include "Clause.hpp"
 
 /**
  * @brief Namespace containing testing helpers
@@ -37,6 +38,19 @@ namespace test {
         }
 
         return gt.empty();
+    }
+
+    template<sat::clause_like Cl, sat::clause_like Cl_>
+    bool findClause(const Cl &clause, const std::vector<Cl_> &clauses) {
+        std::vector literals(clause.begin(), clause.end());
+        std::ranges::sort(literals, {}, [](auto lit) { return lit.get(); });
+        auto res = std::ranges::find_if(clauses, [&literals](const auto &c) {
+            std::vector clauseLits(c.begin(), c.end());
+            std::ranges::sort(clauseLits, {}, [](auto lit) { return lit.get(); });
+            return clauseLits == literals;
+        });
+
+        return res != clauses.end();
     }
 }
 
