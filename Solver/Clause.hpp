@@ -123,7 +123,7 @@ namespace sat {
          * @param index index for access
          * @return Literal at given index
          */
-        const Literal &operator[](long index) const;
+        const Literal &operator[](std::size_t index) const;
 
         /**
          * Whether the clause is empty

@@ -13,7 +13,6 @@ namespace sat {
     //TODO implementation here
 
     Clause::Clause(std::vector<Literal> literals) {
-
     }
 
     short Clause::getRank(Literal l) const {
@@ -37,7 +36,7 @@ namespace sat {
     bool Clause::isEmpty() const {
     }
 
-    const Literal &Clause::operator[](long index) const {
+    const Literal &Clause::operator[](std::size_t index) const {
     }
 
     std::size_t Clause::size() const {
