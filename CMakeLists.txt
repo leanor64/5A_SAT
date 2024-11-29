@@ -41,7 +41,7 @@ else ()
 endif ()
 
 file(GLOB_RECURSE SOURCES ${CMAKE_SOURCE_DIR}/Solver/*.cpp)
-set(TARGETS )
+file(GLOB TARGETS ${CMAKE_SOURCE_DIR}/*.cpp)
 
 message("generating following targets")
 foreach (TARGET ${TARGETS})
