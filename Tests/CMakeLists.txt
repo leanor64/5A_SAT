@@ -29,7 +29,7 @@ if (BUILD_TYPE STREQUAL "debug")
     add_executable(all_tests all_tests.cpp ${TEST_SOURCES} ${SOURCES} ${BACKWARD_ENABLE})
     add_backward(all_tests)
 else()
-    add_executable(all_tests all_tests.cpp ${TEST_SOURCES} ${SOURCES} ${BACKWARD_ENABLE})
+    add_executable(all_tests all_tests.cpp ${TEST_SOURCES} ${SOURCES})
 endif()
 
 target_compile_definitions(all_tests PUBLIC __RUN_ALL_TESTS__)
