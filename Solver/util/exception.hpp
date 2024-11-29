@@ -1,7 +1,7 @@
 /**
 * @author Tim Luchterhand
 * @date 28.11.24
-* @brief Not implemented exception
+* @brief Not implemented exception and BadHeuristicCall exception
 */
 
 #ifndef EXCEPTION_HPP
@@ -9,9 +9,17 @@
 
 #include <stdexcept>
 #include <string>
+#include <functional>
 
 struct NotImplementedException : std::logic_error {
     NotImplementedException(const std::string &methodName = {});
+};
+
+class BadHeuristicCall : public std::bad_function_call {
+    std::string message;
+public:
+    BadHeuristicCall(std::string message = {});
+    const char *what() const noexcept override;
 };
 
 #define NOT_IMPLEMENTED NotImplementedException(__PRETTY_FUNCTION__)
