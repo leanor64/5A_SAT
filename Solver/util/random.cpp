@@ -7,7 +7,9 @@
 #include "random.hpp"
 
 namespace sat {
-    RNG::RNG() : el(rd()) {}
+    RNG::RNG() : el(rd()) {
+        setSeed(1337);
+    }
 
     RNG & RNG::get() {
         static RNG rng;
