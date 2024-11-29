@@ -13,15 +13,6 @@
 #include "Clause.hpp"
 
 namespace sat {
-    /**
-     * Represents a truth value
-     */
-    enum class TruthValue {
-        False = -1, ///< variable is true
-        Undefined = 0, ///< variable is unassigned
-        True = 1 ///< variable is true
-    };
-
     /*
      * These two types might be useful for your implementation. A shared pointer manages an object on the heap. It can
      * be copied without copying the actual object. This can be useful if you want to access the same clause from

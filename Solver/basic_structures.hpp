@@ -14,6 +14,15 @@
 namespace sat {
 
     /**
+     * Represents a truth value
+     */
+    enum class TruthValue {
+        False = -1, ///< variable is true
+        Undefined = 0, ///< variable is unassigned
+        True = 1 ///< variable is true
+    };
+
+    /**
      * Structure representing a binary variable in a CNF-SAT problem
      */
     class  Variable {
