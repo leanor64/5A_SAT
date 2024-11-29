@@ -64,18 +64,18 @@ editor of your choice.
 1. Clone the repo and change into the folder
 2. Create a build folder for each build config (Debug / Release, e.g. build_dbg / build_rel)
 3. To configure the project run the following command (replace <...>):
-    ```bash
+   ```
    cmake -S . -B <path to you build directory> -DCMAKE_BUILD_TYPE=<release/debug>
    ```
    CMake should run without error. Towards the end of the output you should see a list with the targets mentioned above.
    You can manually specify the compiler using the flag `-DCMAKE_CXX_COMPILER=<the compiler of your choice>`
 4. To build a target run the following command
-    ```bash
+   ```
    cmake --build <path to your build folder> -t <name of the target> -j <number of processors to use>
    ```
    If the build was successful, you can launch the executable directly from the terminal. For example, if you built
    the target `test_clause` then you execute the following command:
-   ```bash
+   ```
    <name of your build folder>/Tests/test_clause
    ```
 5. Whenever you add new target (e.g. the solve executable) make sure to rerun CMake (just retype the command in 3.)
