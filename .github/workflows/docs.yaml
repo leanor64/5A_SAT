@@ -25,5 +25,5 @@ jobs:
       - name: deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: ${{ env.DOCS_OUT_DIR }}
+          folder: ${{ env.DOCS_OUT_DIR }}/html
           branch: gh-pages
