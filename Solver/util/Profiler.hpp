@@ -1,6 +1,7 @@
 /**
 * @author Tim Luchterhand
 * @date 09.08.2024
+* @file Profiler.hpp
 * @brief Timing and profiling utilities
 */
 

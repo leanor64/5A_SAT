@@ -1,6 +1,7 @@
 /**
 * @author Tim Luchterhand
 * @date 26.11.24
+* @file Clause.hpp
 * @brief Contains the class Clause that consists of one or more literals
 */
 

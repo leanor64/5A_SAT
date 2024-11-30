@@ -1,6 +1,7 @@
 /**
 * @author Tim Luchterhand
 * @date 27.11.24
+* @file inout.hpp
 * @brief Contains functions for reading and writing dimacs format. Also contains printing utilities for basic structures
 */
 
