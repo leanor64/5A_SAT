@@ -1,6 +1,7 @@
 /**
 * @author Tim Luchterhand
 * @date 27.11.24
+* @file Solver.hpp
 * @brief Contains the main solver class
 */
 

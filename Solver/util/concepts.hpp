@@ -1,6 +1,7 @@
 /**
 * @author Tim Luchterhand
 * @date 26.11.24
+* @file concepts.hpp
 * @brief Contains various type traits and concepts.
 * @note If you are familiar with the c++ type system, you might find these things useful. If not, don't be scared,
 * you don't need to understand them

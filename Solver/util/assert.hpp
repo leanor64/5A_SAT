@@ -1,6 +1,7 @@
 /**
 * @author Tim Luchterhand
 * @date 29.11.24
+* @file assert.hpp
 * @brief Wrapper around the classic C assert that always evaluates an expression but only checks the result in debug
 * mode
 */

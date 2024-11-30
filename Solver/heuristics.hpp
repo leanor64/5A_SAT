@@ -1,6 +1,7 @@
 /**
 * @author Tim Luchterhand
 * @date 29.11.24
+* @file heuristics.hpp
 * @brief Contains different branching heuristics
 */
 

@@ -1,6 +1,7 @@
 /**
 * @author Tim Luchterhand
 * @date 28.11.24
+* @file exception.hpp
 * @brief Not implemented exception and BadHeuristicCall exception
 */
 

@@ -1,6 +1,7 @@
 /**
 * @author Tim Luchterhand
 * @date 26.11.24
+* @file random.hpp
 * @brief Contains an easy-to-use random number generator
 */
 

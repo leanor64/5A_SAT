@@ -1,6 +1,7 @@
 /**
 * @author Tim Luchterhand
 * @date 26.11.24
+* @file basic_structures.hpp
 * @brief Contains the basic structures variable and literal
 */
 
@@ -14,7 +15,7 @@
 namespace sat {
 
     /**
-     * Represents a truth value
+     * @brief Represents a truth value
      */
     enum class TruthValue {
         False = -1, ///< variable is true
@@ -23,7 +24,7 @@ namespace sat {
     };
 
     /**
-     * Structure representing a binary variable in a CNF-SAT problem
+     * @brief Structure representing a binary variable in a CNF-SAT problem
      */
     class  Variable {
         // Private members here
@@ -48,7 +49,9 @@ namespace sat {
     };
 
     /**
-     * Structure representing a literal in a CNF-SAT problem. A literal of variable x is either x or ¬x
+     * @brief Structure representing a literal in a CNF-SAT problem.
+     * @details @copybrief
+     * A literal of variable x is either x or ¬x
      */
     class Literal {
         // Private members here
