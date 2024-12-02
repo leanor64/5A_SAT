@@ -96,6 +96,27 @@ namespace sat {
          */
         bool isValid() const;
     };
+
+    /**
+     * @brief Wrapper for heuristics that do not support move construction or assignment
+     * @tparam H heuristic type
+     */
+    template<heuristic H>
+    class MovableHeuristic {
+        std::unique_ptr<H> h;
+    public:
+        /**
+         * Ctor
+         * @tparam Args argument types
+         * @param args ctor arguments to heuristic
+         */
+        template<typename... Args>
+        explicit MovableHeuristic(Args &&...args): h(std::make_unique<H>(std::forward<Args>(args)...)) {}
+
+        Variable operator()(const std::vector<TruthValue> &values, std::size_t numOpenVariables) const {
+            return h->operator()(values, numOpenVariables);
+        }
+    };
 }
 
 #endif //HEURISTICS_HPP
