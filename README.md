@@ -128,3 +128,23 @@ implementation goes in the file `Solver/basic_structures.cpp` (simply replace al
 
 Test your implementation by building and running the test target `test_basic_structures`.
 
+### 2. Clause
+Next we need a structure to represent clauses. This can be a simple list that holds a variable number of literals.
+I recommend using `std::vector` from the header `<vector>`. This is a variable sized array that holds elements in 
+a contiguous block of memory which makes it very efficient in loops and also provides efficient random access. Now you
+have two choices:
+1. If you want to implement the unit propagation algorithm using counters, then you don't need to implement anything.
+   Simply use `std::vector<Literal>` as your clause. I recommend that you create a type alias as follows
+   ```c++
+   using Clause = std::vector<Literal>;
+   ```
+   This alias is actually necessary because the tests depend on it. On top of that, it makes your code mor readable.
+   If you choose this option, you can simply delete the class `Clause` in `Solver/Clause.hpp` and remove all the
+   implementations from `Solver/Clause.cpp` (if you delete the `.cpp` file, you need to reload CMake). In this case we
+   don't care that the unit tests for the clause class don't work. You can simply delete `Tests/test_clause.cpp` and
+   reload CMake.
+2. If you want to implement the more efficient unit propagation using watch literals, I recommend that you use the
+   `Clause`-class already declared in `Solver/Clause.hpp`. Again, you will need to implement all functions in the
+   corresponding `.cpp` file. The class is designed to be immutable. You are not supposed to change a SAT-`Clause` once
+   it has been declared (you cannot add or remove literals). Follow the documentation already provided and test your
+   code using the test target `test_clause`.
