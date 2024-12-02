@@ -114,3 +114,17 @@ can simply add test cases in the test files already present.
 You're implementation should pass all unit tests with the exception of the tests in `test_clause.cpp` (if you plan on
 implementing the unit propagation using counters, you don't need to implement a Clause-class). Especially the unit
 propagation tests will be used to determine your grade for this TP.
+
+## Exercises
+
+### 1. Basic Structures
+First we will focus on the implementation of the structures that we use for representing the problem: Variable and
+Literal. A Variable is more or less just an ID identifying a variable in the SAT-formula. A Literal represents one of
+two values that a variable can take. Since the variables are boolean, the only possible values for let's say a variable
+`x` are `x` and `¬x`.
+
+Follow the documentation in `Solver/basic_structures.hpp` to implement all the necessary functions. Remember that the
+implementation goes in the file `Solver/basic_structures.cpp` (simply replace all the method bodies).
+
+Test your implementation by building and running the test target `test_basic_structures`.
+
