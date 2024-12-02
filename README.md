@@ -130,9 +130,9 @@ Test your implementation by building and running the test target `test_basic_str
 
 ### 2. Clause
 Next we need a structure to represent clauses. This can be a simple list that holds a variable number of literals.
-I recommend using `std::vector` from the header `<vector>`. This is a variable sized array that holds elements in 
-a contiguous block of memory which makes it very efficient in loops and also provides efficient random access. Now you
-have two choices:
+I recommend using [`std::vector`](https://en.cppreference.com/w/cpp/container/vector) from the header `<vector>`.
+This is a variable sized array that holds elements in a contiguous block of memory which makes it very efficient in
+loops and also provides efficient random access. Now you have two choices:
 1. If you want to implement the unit propagation algorithm using counters, then you don't need to implement anything.
    Simply use `std::vector<Literal>` as your clause. I recommend that you create a type alias as follows
    ```c++
@@ -174,8 +174,8 @@ you don't need to worry about memory management.
    with a well-defined interface is that you can easily replace it later with something more powerful.
 4. To test your solver, write a simple executable `solve.cpp` that you place in the main directory. You first need
    to load a problem using the functions from `Solver/input.hpp`. Then you configure your solver, run the search and
-   finally print the result. You can print all basic structures directly using `std::cout` or you can convert your
-   result back to the DIMACS format and print that.
+   finally print the result. You can print all basic structures directly using
+   [`std::cout`](https://en.cppreference.com/w/cpp/io/cout) or you can convert your result back to the DIMACS format and print that.
 5. Once your DPLL search works you can:
    * Implement a better value selection heuristic. If you used the `FirstVariable` heuristic in step 4 I recommend that
      you use this interface to create your own heuristic. Simply make a copy of `FirstVariable` in
