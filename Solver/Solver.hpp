@@ -28,7 +28,7 @@ namespace sat {
      * @brief Main solver class
      */
     class Solver {
-        // private members here
+        // @TODO private members here
     public:
 
         /**

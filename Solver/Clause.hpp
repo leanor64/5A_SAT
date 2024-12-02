@@ -44,7 +44,7 @@ namespace sat {
      * std::vector<Literal>::begin() and end() respectively
      */
     class Clause {
-        // Private members here
+        // @TODO Private members here
     public:
 
         /**
