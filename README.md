@@ -1,5 +1,5 @@
 # SatSolverTemplate
-SAT solver template for a course at INSA Toulouse.
+SAT solver template for a course (TP) at INSA Toulouse.
 
 ## Setup
 For this course, you need a modern C++ compiler that supports C++20. I recommend using `g++` or `clang`. `MSVC` should
@@ -79,3 +79,38 @@ editor of your choice.
    <name of your build folder>/Tests/test_clause
    ```
 5. Whenever you add new target (e.g. the solve executable) make sure to rerun CMake (just retype the command in 3.)
+
+## Project Structure
+The goal of this course is to develop a simple SAT-solver in C++. Don't worry if you're not very familiar with this
+language. This template should help you focus on the logic of the solver instead of worrying about implementation
+details. On the other hand, if you're a C++ pro then feel free to deviate from the template as you see fit.
+
+You can find a doxygen generated documentation of all the structures
+[here](https://timmifixedit.github.io/SatSolverTemplate/files.html).
+
+### Implementation of the Solver
+The solver will be developed as a C++-class in `Solver/Solver.hpp(cpp)`. As a reminder, in C and C++ we usually *declare*
+functions and classes in the header file. A declaration involves only the function signatures and the class members.
+The actual *implementation* will be done in the `.cpp` file. Exceptions are template classes and functions, but normally
+you don't need to worry about that too much. To facilitate the implementation of the solver, we'll make use of the
+following constructs:
+* Variable and Literal (in `Solver/basic_structures.hpp(cpp)`)
+* Clause (in `Solver/Clause.hpp(cpp)`)
+
+Additionally, I already implemented some helping constructs in `Solver/util` as well as functions for reading and
+writing SAT-formulas in `Solver/inout.hpp(cpp)`.
+
+### Unit Tests using GTest
+Under the `Tests` directory I implemented some unit tests using the [GTest framework](https://google.github.io/googletest/)
+for the different structures that you will implement. They are by no means exhaustive but should give you some idea of
+how to use the structures and what they should do. Feel free to add further testcases if you wish (the language is
+pretty straightforward). The tests are grouped by implementation task (tests for the basic structures, for the clauses
+and for the solver itself). Also, I included 4 test cases for the unit propagation algorithm. Each of those test groups
+compiles to a separate testing executable. This means you can run them separately. Alternatively, you can run all tests
+using the `all_tests` target. Initially, all tests will fail since the implementations of all methods are missing. If
+you want to add a new test executable, make sure to respect the naming convention `test_<name of your test>.cpp`. Or you
+can simply add test cases in the test files already present.
+
+You're implementation should pass all unit tests with the exception of the tests in `test_clause.cpp` (if you plan on
+implementing the unit propagation using counters, you don't need to implement a Clause-class). Especially the unit
+propagation tests will be used to determine your grade for this TP.
