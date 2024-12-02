@@ -41,7 +41,7 @@ namespace sat {
         throw NOT_IMPLEMENTED;
     }
 
-    const Literal &Clause::operator[](std::size_t index) const {
+    Literal Clause::operator[](std::size_t index) const {
         throw NOT_IMPLEMENTED;
     }
 

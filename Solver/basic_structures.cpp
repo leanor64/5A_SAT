@@ -19,7 +19,7 @@ namespace sat {
         throw NOT_IMPLEMENTED;
     }
 
-    bool Variable::operator==(const Variable &other) const {
+    bool Variable::operator==(Variable other) const {
         throw NOT_IMPLEMENTED;
     }
 
@@ -39,7 +39,7 @@ namespace sat {
         throw NOT_IMPLEMENTED;
     }
 
-    bool Literal::operator==(const Literal &other) const {
+    bool Literal::operator==(Literal other) const {
         throw NOT_IMPLEMENTED;
     }
 

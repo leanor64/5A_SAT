@@ -45,7 +45,7 @@ namespace sat {
          * Compares the underlying variable identifier
          * @return True if both variables are the same (have the same identifier)
          */
-        bool operator==(const Variable &other) const;
+        bool operator==(Variable other) const;
     };
 
     /**
@@ -86,7 +86,7 @@ namespace sat {
          * Compares underlying literal identifiers
          * @return True if both literals are exactly the same (sign and variable)
          */
-        bool operator==(const Literal &) const;
+        bool operator==(Literal) const;
     };
 
     /**
