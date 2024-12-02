@@ -105,6 +105,12 @@ namespace sat::concepts {
      */
     template<typename T, template<typename...> typename Template>
     concept same_template_clvref = same_template_lvref<T, Template> and std::is_const_v<std::remove_reference_t<T>>;
+
+    /**
+     * Type that is an enum
+     */
+    template<typename T>
+    concept enum_type = std::is_enum_v<T>;
 }
 
 #endif //CONCEPTS_HPP
