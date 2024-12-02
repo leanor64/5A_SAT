@@ -148,3 +148,42 @@ have two choices:
    corresponding `.cpp` file. The class is designed to be immutable. You are not supposed to change a SAT-`Clause` once
    it has been declared (you cannot add or remove literals). Follow the documentation already provided and test your
    code using the test target `test_clause`.
+
+### Solver
+No we get to the actual solver. Depending on the approach that you choose for the unit propagation you need to organize
+your Clauses and Literals. In any case, you additionally need to keep track of the current variable assignment, i.e.
+the *model*. This means that you need to save the truth value of every variable. A variable can either be `true`,
+`false` or `unassigned`. Independently of your unit propagation algorithm you need to be able to efficiently look up
+clauses by literals. Since you don't want to have multiple copies of the same clauses in your solver, you need to
+organize them using pointers. I recommend that you use [`std::shared_ptr`](https://en.cppreference.com/w/cpp/memory/shared_ptr)
+for that purpose. I already made the type aliases `ClausePointer` and `ConstClausePointer` for you in
+`Solver/Solver.hpp`. The advantage with [`std::shared_ptr`](https://en.cppreference.com/w/cpp/memory/shared_ptr) is that
+you don't need to worry about memory management.
+
+1. Start by declaring all your data structures within the solver class (organize your clauses, unit literals and model
+   etc...). The start with the constructor and methods like `val`, `satisfied`, `alsified`, ...
+   You can run the test target `test_solver` even if you haven't yet finished implementing all methods.
+2. Implement the **unit propagation** using the algorithm of you choice. This function is crucial for the SAT-solver,
+   make sure it works as intended! Verify your implementation using the simple unit propagation test cases in
+   `test_solver` and using the extra tests in `test_unit_propagation`.
+3. Once your unit propagation works, you can finally implement the actual solve loop. Start with the DPLL algorithm.
+   You will see that at some point you will choose the next variable to decide. You can use the `FirstVariable`
+   heuristic from `Solver/heuristics.hpp`. This is probably the simplest heuristic there is (and it is not very good).
+   You can also write your own heuristic (now or later). You don't need to use this class and instead implement your
+   heuristic however you like (for example directly inside the solver). The advantage of an external heuristic class
+   with a well-defined interface is that you can easily replace it later with something more powerful.
+4. To test your solver, write a simple executable `solve.cpp` that you place in the main directory. You first need
+   to load a problem using the functions from `Solver/input.hpp`. Then you configure your solver, run the search and
+   finally print the result. You can print all basic structures directly using `std::cout` or you can convert your
+   result back to the DIMACS format and print that.
+5. Once your DPLL search works you can:
+   * Implement a better value selection heuristic. If you used the `FirstVariable` heuristic in step 4 I recommend that
+     you use this interface to create your own heuristic. Simply make a copy of `FirstVariable` in
+     `Solver/heuristics.hpp` and don't forget the implementation in the `.cpp` file. You could for example try
+     implementing a heuristic that randomly selects an unassigned variable (there is a random number generator in
+     `Solver/util/random.hpp`).
+   * Implement clause learning and ultimately CDCL search. This algorithm is much more powerful than DPLL and should be
+     able to resolve even big problem instances.
+
+Note: You will get a good grade if you manage to correctly implement DPLL, no need to do all the tasks in 5. But you
+will get an even better grade if you put in some extra work :).
