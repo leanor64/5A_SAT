@@ -161,7 +161,7 @@ for that purpose. I already made the type aliases `ClausePointer` and `ConstClau
 you don't need to worry about memory management.
 
 1. Start by declaring all your data structures within the solver class (organize your clauses, unit literals and model
-   etc...). The start with the constructor and methods like `val`, `satisfied`, `alsified`, ...
+   etc...). The start with the constructor and methods like `val`, `satisfied`, `falsified`, ...
    You can run the test target `test_solver` even if you haven't yet finished implementing all methods.
 2. Implement the **unit propagation** using the algorithm of you choice. This function is crucial for the SAT-solver,
    make sure it works as intended! Verify your implementation using the simple unit propagation test cases in
