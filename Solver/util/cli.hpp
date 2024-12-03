@@ -116,6 +116,11 @@ namespace cli {
     template<detail::arg Option, detail::arg ... Options>
     std::string parse(int argc, char *argv[], const Option &option, const Options &... rest) {
         using namespace std::string_literals;
+        if (argc < 2) {
+            std::cerr << "Specify the input file" << std::endl;
+            std::exit(1);
+        }
+
         const std::span options(argv + 2, argv + argc);
         auto res = std::ranges::find(options, option.name);
         if (res != options.end()) {
