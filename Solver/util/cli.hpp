@@ -52,21 +52,22 @@ namespace cli {
         template<typename T>
         concept arg = std::same_as<T, Switch> or sat::concepts::same_template<T, ValueArg>;
 
-        template<typename>
+        template<typename T>
         struct TypeParse {
+            static_assert(sat::traits::always_false_v<T>, "Unsupported value type");
         };
 
-        template<std::same_as<float> T>
-        struct TypeParse<T> {
-            T operator()(const std::string &s) const {
+        template<>
+        struct TypeParse<float> {
+            float operator()(const std::string &s) const {
                 return std::stof(s);
             }
         };
 
-        template<std::same_as<double> T>
-        struct TypeParse<T> {
-            T operator()(const std::string &s) const {
-                return std::stof(s);
+        template<>
+        struct TypeParse<double> {
+            double operator()(const std::string &s) const {
+                return std::stod(s);
             }
         };
 
@@ -125,8 +126,6 @@ namespace cli {
                     throw std::runtime_error("Could not find argument for option "s + option.name);
                 }
 
-                if constexpr (std::floating_point<typename Option::type>) {
-                }
                 option.value = detail::TypeParse<typename Option::type>()(*res);
             }
         } else {
