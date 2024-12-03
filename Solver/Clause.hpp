@@ -59,7 +59,7 @@ namespace sat {
          * @TODO (for example a flag that tells the constructor if the literals are already sorted)
          * @TODO or even further constructors if you want.
          */
-        explicit Clause(std::vector<Literal> literals);
+        Clause(std::vector<Literal> literals);
 
         /*
          * @TODO if you want, you can declare additional constructors here
