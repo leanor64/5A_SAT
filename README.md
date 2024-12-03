@@ -192,3 +192,18 @@ you don't need to worry about memory management.
 
 Note: You will get a good grade if you manage to correctly implement DPLL, no need to do all the tasks in 5. But you
 will get an even better grade if you put in some extra work :).
+
+## Grading
+You should hand in a working solver leveraging at least the DPLL algorithm. Create a simple executable as described in
+step 4 above. Your executable needs to accept at least one command line argument (the path to the problem instance).
+If the solver accepts more arguments, please document them and give them meaningful default values. The solver needs to
+be callable with just the problem instance. When printing your solution, respect the rules also detailed in step 4.
+If you don't, you will lose points!
+
+Your solver will be run on a set of different problem instances of different difficulties (the ones under `eval`).
+The more instance you can solve, the better. Your solver will be given a timeout of 2 minutes for each instance. When
+running your solver, your code will be built in release mode (with all optimizations) to make it faster. If you want
+to see how fast your solver can go, you too should build in release mode.
+
+Your solver should at least be able to solve the medium instances (both SAT and UNSAT). If it can solve the harder once,
+that's great. But above all, your solver should not crash. Make sure to write proper and safe code!
