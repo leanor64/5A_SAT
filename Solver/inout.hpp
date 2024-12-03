@@ -85,6 +85,17 @@ namespace sat::inout {
 
         return ss.str();
     }
+
+    /**
+     * Converts a range of literals to dimacs format
+     * @tparam L Literal range type
+     * @param literals the literals to convert
+     * @return dimacs string
+     */
+    template<concepts::typed_range<Literal> L>
+    std::string to_dimacs(const L &literals) {
+        return to_dimacs(literals | std::views::transform([](auto literal) { return std::vector{literal}; }));
+    }
 }
 
 namespace sat {
