@@ -127,15 +127,15 @@ namespace cli {
                 }
 
                 option.value = detail::TypeParse<typename Option::type>()(*res);
-                std::cout << "using value " << option.value << " for option " << option.name << std::endl;
+                std::cout << "c -- using value " << option.value << " for option " << option.name << std::endl;
             }
         } else {
             if constexpr (sat::concepts::same_template<Option, ValueArg>) {
                 if (option.required) {
                     throw std::runtime_error("Required argument "s + option.name + " not specified");
-                } else {
-                    std::cout << "using default value " << option.value << " for option " << option.name << std::endl;
                 }
+
+                std::cout << "c -- using default value " << option.value << " for option " << option.name << std::endl;
             }
         }
 
