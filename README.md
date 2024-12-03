@@ -174,14 +174,19 @@ you don't need to worry about memory management.
    with a well-defined interface is that you can easily replace it later with something more powerful.
 4. To test your solver, write a simple executable `solve.cpp` that you place in the main directory. You first need
    to load a problem using the functions from `Solver/input.hpp`. Then you configure your solver, run the search and
-   finally print the result. You can print all basic structures directly using
-   [`std::cout`](https://en.cppreference.com/w/cpp/io/cout) or you can convert your result back to the DIMACS format and print that.
+   finally print the result. When printing your solver output, please respect the following rules:
+   * If the instance is UNSAT, print the word `UNSAT`.
+   * If the instance is SAT, print the solution (all unit literals) in DIMACS format. Use the function
+     `sat::inout::to_dimacs` from ´Solver/inout.hpp´ and [`std::cout`](https://en.cppreference.com/w/cpp/io/cout).
+   * Make sure to respect these rules. You can print other stuff as you like as long as you prepend it with the
+     character `c` to mark the line as comment.
 5. Once your DPLL search works you can:
    * Implement a better value selection heuristic. If you used the `FirstVariable` heuristic in step 4 I recommend that
      you use this interface to create your own heuristic. Simply make a copy of `FirstVariable` in
      `Solver/heuristics.hpp` and don't forget the implementation in the `.cpp` file. You could for example try
      implementing a heuristic that randomly selects an unassigned variable (there is a random number generator in
      `Solver/util/random.hpp`).
+   * Implement restarting.
    * Implement clause learning and ultimately CDCL search. This algorithm is much more powerful than DPLL and should be
      able to resolve even big problem instances.
 
