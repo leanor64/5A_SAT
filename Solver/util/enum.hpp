@@ -64,6 +64,12 @@ namespace enum_detail {
     };
 }
 
+/**
+ * @brief Create a printable enum class
+ * @details specify the enum class name first and then an arbitrary number of entries.
+ * @param NAME enum class name
+ * @param VA_ARGS arbitrary number of enum entries
+ */
 #define PENUM(NAME, ...) enum class NAME { __VA_ARGS__ };                                                       \
 inline constexpr std::string_view __##NAME##_enum_str_vals__ = #__VA_ARGS__;                                    \
 inline constexpr std::array __##NAME##_converter__{enum_detail::split<__##NAME##_enum_str_vals__, ','>::value };\
