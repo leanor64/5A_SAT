@@ -11,6 +11,13 @@ these libraries are available for Windows...
 All the remaining dependencies are handled by cmake.
 
 ## Configure the Project
+### If you can, DON'T USE WINDOWS
+C++ development on Windows is awful! Use a virtual machine or WSL, I don't care. If you have no other options, you need
+to have a recent version of MSVC installed. If you're using VS-Code, make sure to launch it from the Windows developer
+console [Developer Command Prompt](https://code.visualstudio.com/docs/cpp/config-msvc#_check-your-microsoft-visual-c-installation)!
+**Otherwise debugging from within VSC DOES NOT WORK PROPERLY!!!**
+
+### General Remarks
 I recommend that you use a C++ IDE like CLion or an editor like VS-Code. Both have cmake integration making your life a
 lot easier. If you like suffering and plan on developing using a basic editor, fret naught, it's not that complicated,
 actually. The CMake project automatically configures all targets (the executables that you will run later) for you.
