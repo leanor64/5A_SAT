@@ -27,10 +27,10 @@ FetchContent_Declare(iterators
 FetchContent_MakeAvailable(iterators)
 include_directories(${iterators_SOURCE_DIR})
 
-add_compile_definitions("$<$<BOOL:MSVC>:__PRETTY_FUNCTION__=__FUNCSIG__>")
-set(BASE_FLAGS "$<IF:$<BOOL:MSCV>,/W4,-Wall;-Wextra;-Wpedantic;-mtune=native;-march=native>")
-set(DEBUG_FLAGS "$<IF:$<BOOL:MSVC>,/fsanitize=address;/Zi,-fsanitize=address;-fno-omit-frame-pointer;-g>")
-set(RELEASE_FLAGS "$<IF:$<BOOL:MSVC>,/O2,-O3>")
+add_compile_definitions("$<$<BOOL:${MSVC}>:__PRETTY_FUNCTION__=__FUNCSIG__>")
+set(BASE_FLAGS "$<IF:$<BOOL:${MSVC}>,/W4,-Wall;-Wextra;-Wpedantic;-mtune=native;-march=native>")
+set(DEBUG_FLAGS "$<IF:$<BOOL:${MSVC}>,/fsanitize=address;/Zi,-fsanitize=address;-fno-omit-frame-pointer;-g>")
+set(RELEASE_FLAGS "$<IF:$<BOOL:${MSVC}>,/O2,-O3>")
 add_compile_options("${BASE_FLAGS};$<$<CONFIG:Debug>:${DEBUG_FLAGS}>$<$<CONFIG:Release>:${RELEASE_FLAGS}>")
 add_link_options("$<$<CONFIG:Debug>:-fsanitize=address>")
 
