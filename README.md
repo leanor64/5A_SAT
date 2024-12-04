@@ -66,11 +66,13 @@ There are three configurations in the `launch.json`:
 * `Run current target (msvc)`: Use this config if you're on Windows
 
 In any case, once you opened any code file, press F5 to run the current *Launch target*. This is the target that is
-selected in the `CMake Tools` tab in the sidebar under `Project Status/Launch`.
+selected in the `CMake Tools` tab in the sidebar under `Project Status/Launch`. If F5 does not work, use the `Run and
+Debug` tab in the sidebar and select the appropriate launch config.
 
 ### Manually using CMake
 If you don't want to use one of the aforementioned methods, you can manually configure the project and work with any
-editor of your choice.
+editor of your choice. This is the most flexible option, and it's actually not that complicated. Just follow the
+instructions:
 1. Clone the repo and change into the folder
 2. Create a build folder for each build config (Debug / Release, e.g. build_dbg / build_rel)
 3. To configure the project run the following command (replace <...>):
