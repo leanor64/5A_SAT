@@ -58,6 +58,16 @@ above should be visible here. You can alternatively build, launch and debug from
 and selecting the desired action. Or you simply use the integrated terminal and launch the executable manually (once
 built, they should be in you build folder).
 
+If you want to launch / debug an executable from VS-Code while passing command line arguments, you need to add them to
+the `.vscode/launch.json`. Open the file and add the arguments as comma separated strings to the `args` variable.
+There are three configurations in the `launch.json`:
+* `Run current target (gdb)`: Use this config if you're on Linux and use `g++` as compiler
+* `Run current target (lldb)`: Use this config if you're on MacOS or on Linux and use `clang` as compiler
+* `Run current target (msvc)`: Use this config if you're on Windows
+
+In any case, once you opened any code file, press F5 to run the current *Launch target*. This is the target that is
+selected in the `CMake Tools` tab in the sidebar under `Project Status/Launch`.
+
 ### Manually using CMake
 If you don't want to use one of the aforementioned methods, you can manually configure the project and work with any
 editor of your choice.
