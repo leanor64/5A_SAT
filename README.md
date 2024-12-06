@@ -29,7 +29,7 @@ The following targets should be configured automatically:
 * test_unit_propagation (runs only the tests for the unit propagation)
 
 If you want to add other executables (e.g. a 'solve' executable that reads a problem and tries to solve it), then you
-can add them in the main project file. For example, you could create `solve.cpp` file. In order to generate a build
+can add them in the main project folder. For example, you could create a `solve.cpp` file. In order to generate a build
 target, you need to rerun CMake.
 
 If you want to add a test, then you should add `test_<name of your test>.cpp` in the `Tests`-directory. Again you need
@@ -51,7 +51,7 @@ Clone the project and open the folder with VS-Code. If asked to trust the projec
 ask you to select a 'Kit' for the project. Here you select your C++-compiler. Once done, the CMake project should
 automatically load.
 
-Select the `CMake Tools` extension sidebar on the left. Depending on you VSC configuration, you should see three
+Select the `CMake Tools` extension in the sidebar on the left. Depending on you VSC configuration, you should see three
 tabs (usually on the left). In the 'Project Status' tab you should see six drop-down items: 
 * Folder: We don't care
 * Configure: Here you can select your compiler and the build configuration (Debug / Release)
@@ -180,7 +180,7 @@ for that purpose. I already made the type aliases `ClausePointer` and `ConstClau
 you don't need to worry about memory management.
 
 1. Start by declaring all your data structures within the solver class (organize your clauses, unit literals and model
-   etc...). The start with the constructor and methods like `val`, `satisfied`, `falsified`, ...
+   etc...). Then implement the constructor and methods like `val`, `satisfied`, `falsified`, ...
    You can run the test target `test_solver` even if you haven't yet finished implementing all methods.
 2. Implement the **unit propagation** using the algorithm of you choice. This function is crucial for the SAT-solver,
    make sure it works as intended! Verify your implementation using the simple unit propagation test cases in
