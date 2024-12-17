@@ -11,50 +11,92 @@
 #include "util/exception.hpp"
 
 namespace sat {
-    //TODO implementation here
 
     Clause::Clause(std::vector<Literal> literals) {
-        throw NOT_IMPLEMENTED;
+        lits=literals;
+        index1=0;
+        index2=1;
     }
 
     short Clause::getRank(Literal l) const {
-        throw NOT_IMPLEMENTED;
+        if (lits.at(index1) == l.get()) {
+            return 0;
+        } else if (lits.at(index2) == l.get()) {
+            return 1;
+        } else {
+            return -1;
+        }
     }
 
     std::size_t Clause::getIndex(short rank) const {
-        throw NOT_IMPLEMENTED;
+        size_t res = -1;
+        if(rank == 0) {
+            res = index1;
+        } else if (rank == 1) {
+            res = index2;
+        }
+        return res;
     }
 
     bool Clause::setWatcher(Literal l, short watcherNo) {
-        throw NOT_IMPLEMENTED;
+        bool ret = false;
+        auto res = std::ranges::find(lits, l);
+        if (res != lits.end()) {
+            int ind = res - lits.begin();
+            if (watcherNo == 0) {
+                index1 = ind;
+                ret = true;
+            } else if (watcherNo == 1) {
+                index2 = ind;
+                ret = true;
+            }
+        } 
+        return ret;
     }
 
     auto Clause::begin() const -> std::vector<Literal>::const_iterator {
-        throw NOT_IMPLEMENTED;
+        return lits.begin();
     }
 
     auto Clause::end() const -> std::vector<Literal>::const_iterator {
-        throw NOT_IMPLEMENTED;
+        return lits.end();
     }
 
     bool Clause::isEmpty() const {
-        throw NOT_IMPLEMENTED;
+        return lits.empty();
     }
 
     Literal Clause::operator[](std::size_t index) const {
-        throw NOT_IMPLEMENTED;
+        return(lits.at(index));
     }
 
     std::size_t Clause::size() const {
-        throw NOT_IMPLEMENTED;
+        return lits.size();
     }
 
     Literal Clause::getWatcherByRank(short rank) const {
-        throw NOT_IMPLEMENTED;
+        if (rank == 0) {
+            return lits.at(index1);
+        } else {
+            return lits.at(index2);
+        }
     }
 
     bool Clause::sameLiterals(const Clause &other) const {
-        throw NOT_IMPLEMENTED;
+        bool res = true;
+        if (lits.size() == other.size()) {
+            for (unsigned int i = 0; i < lits.size(); i++) {
+                if (std::count(other.begin(), other.end(),lits.at(i)) != 0) {
+                    continue; 
+                } else {
+                    res = false;
+                    break;
+                }
+            }
+        } else {
+            res = false;
+        }
+        return res;
     }
 
 }

@@ -10,48 +10,56 @@
 namespace sat {
     // @TODO implementation here
 
-
     Variable::Variable(unsigned val) {
-        throw NOT_IMPLEMENTED;
+        var = val;
     }
 
     unsigned Variable::get() const {
-        throw NOT_IMPLEMENTED;
+        return var;
     }
 
     bool Variable::operator==(Variable other) const {
-        throw NOT_IMPLEMENTED;
+        return (var == other.get());
     }
 
     Literal::Literal(unsigned val) {
-        throw NOT_IMPLEMENTED;
+        lit=val;
     }
 
     unsigned Literal::get() const {
-        throw NOT_IMPLEMENTED;
+        return lit;
     }
 
     Literal Literal::negate() const {
-        throw NOT_IMPLEMENTED;
+        // var*2 + 1 => impair donc positif
+        if (lit%2) { 
+            return lit-1;
+        } else {
+            return lit+1;
+        }
     }
 
     short Literal::sign() const {
-        throw NOT_IMPLEMENTED;
+        if (lit%2) { 
+            return +1;
+        } else {
+            return -1;
+        }
     }
 
     bool Literal::operator==(Literal other) const {
-        throw NOT_IMPLEMENTED;
+        return (lit == other.get()) ;
     }
 
     Literal pos(Variable x) {
-        throw NOT_IMPLEMENTED;
+        return 2*x.get()+1;
     }
 
     Literal neg(Variable x) {
-        throw NOT_IMPLEMENTED;
+        return 2*x.get();
     }
 
     Variable var(Literal l) {
-        throw NOT_IMPLEMENTED;
+        return l.get()/2;
     }
 }

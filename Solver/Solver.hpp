@@ -23,12 +23,15 @@ namespace sat {
     using ClausePointer = std::shared_ptr<Clause>;
     using ConstClausePointer = std::shared_ptr<const Clause>;
 
-
     /**
      * @brief Main solver class
      */
     class Solver {
-        // @TODO private members here
+        std::vector<ClausePointer> clauses;
+        std::vector<TruthValue> model;
+        std::vector<Literal> unitLiterals;
+        std::vector<std::vector<ClausePointer>> watchedBy;
+        
     public:
 
         /**

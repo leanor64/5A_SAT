@@ -8,24 +8,46 @@
 #include "util/exception.hpp"
 
 namespace sat {
+    
     Solver::Solver(unsigned numVariables) {
-        throw NOT_IMPLEMENTED;
-    }
+        std::vector<TruthValue> mod(numVariables, sat::TruthValue::Undefined);
+        model = mod;
+    }   
 
     bool Solver::addClause(Clause clause) {
-        throw NOT_IMPLEMENTED;
+        bool res = false;
+        if (clause.size() == 1) {
+            assign(*clause.begin())
+        } else if (!clause.isEmpty()) {
+            auto ptr = std::make_shared<Clause>(clause); 
+            clauses.emplace_back(ptr);
+            Literal l1 = clause.getWatcherByRank(0);
+            Literal l2 = clause.getWatcherByRank(1);
+            watchedBy.at(l1.get()).emplace_back(ptr);
+            watchedBy.at(l2.get()).emplace_back(ptr);
+            res = true;
+        }
+        return res;
     }
 
     auto Solver::rebase() const -> std::vector<Clause> {
-        throw NOT_IMPLEMENTED;
+        std::vector<Clause> newClauses;
+        for (TruthValue val : model) {
+            if () {
+                
+            }
+        }
+
+
+        return newClauses;
     }
 
-    TruthValue Solver::val(Variable x) const {
-        throw NOT_IMPLEMENTED;
+    TruthValue Solver::val(Variable x) const { 
+        return model[x.get()];
     }
 
     bool Solver::satisfied(Literal l) const {
-        throw NOT_IMPLEMENTED;
+        return l.sign() == 1;
     }
 
     bool Solver::falsified(Literal l) const {
