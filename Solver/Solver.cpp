@@ -32,25 +32,27 @@ namespace sat {
 
     auto Solver::rebase() const -> std::vector<Clause> {
         std::vector<Clause> newClauses ;
-        for (ConstClausePointer clause : clauses) {
-            bool satisfiedClause = false;
-            std::vector<Literal> finalClause;
-            for (Literal lit : *clause ) { //watchers ?
-                if (satisfied(lit)) {
-                    satisfiedClause = true;
-                    break;
-                } else if (!falsified(lit)){
-                    finalClause.emplace_back(lit);
-                }
-            }
-            if (!satisfiedClause && !(finalClause.empty())) {
-                newClauses.emplace_back(finalClause);
-            }
-        }
         
-        for (Literal unitL : unitLiterals) {
-            newClauses.emplace_back(Clause({unitL}));
+        for (ClausePointer c : clauses) {
+            for (Literal unitL : unitLiterals) {
+                if (c->getWatcherByRank(0)==unitL || c->getWatcherByRank(1)==unitL ){
+                    newClauses.emplace_back(Clause({unitL}));
+                } else if (c->getWatcherByRank(0)==unitL.negate() || c->getWatcherByRank(1)==unitL.negate() ) {
+                    std::vector<Literal> lits ;
+                    for (Literal l: *c){
+                        if (l != unitL.negate()){
+                            lits.emplace_back(l);
+                        }
+                    }
+                    newClauses.emplace_back(Clause(lits));
+                } else {
+                    newClauses.emplace_back(*c);
+                }
+                
+        
+            }
         }
+
         return newClauses;
     }
 

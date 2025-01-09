@@ -151,6 +151,7 @@ namespace sat {
          */
          bool sameLiterals(const Clause &other) const;
 
+      
     };
 }
 
