@@ -93,6 +93,8 @@ namespace sat {
          */
         bool assign(Literal l);
 
+        bool unitPropagate(Literal l);
+
         /**
          * Does the unit propagation.
          * @return true if unit propagation was successful, false otherwise

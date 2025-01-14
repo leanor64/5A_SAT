@@ -6,6 +6,7 @@
 
 #include "Solver.hpp"
 #include "util/exception.hpp"
+#include <iostream>
 
 namespace sat {
     
@@ -32,12 +33,16 @@ namespace sat {
 
     auto Solver::rebase() const -> std::vector<Clause> {
         std::vector<Clause> newClauses ;
-        
         for (ClausePointer c : clauses) {
+            bool edited = false;
             for (Literal unitL : unitLiterals) {
-                if (c->getWatcherByRank(0)==unitL || c->getWatcherByRank(1)==unitL ){
+                Literal w1 = c->getWatcherByRank(0);
+                Literal w2 = c->getWatcherByRank(1);
+
+                if (satisfied(w1) || satisfied(w2) ){
                     newClauses.emplace_back(Clause({unitL}));
-                } else if (c->getWatcherByRank(0)==unitL.negate() || c->getWatcherByRank(1)==unitL.negate() ) {
+                    edited = true;
+                } else if (falsified(w1) || falsified(w2) ) {
                     std::vector<Literal> lits ;
                     for (Literal l: *c){
                         if (l != unitL.negate()){
@@ -45,14 +50,14 @@ namespace sat {
                         }
                     }
                     newClauses.emplace_back(Clause(lits));
-                } else {
-                    newClauses.emplace_back(*c);
+                    edited = true;
                 }
-                
-        
+            }
+            if (!edited) {
+                newClauses.emplace_back(*c);
             }
         }
-
+        //:std::cout << newClauses.size() << " : Size of newClauses"<< std::endl;
         return newClauses;
     }
 
@@ -90,7 +95,50 @@ namespace sat {
         }
     }
 
+    bool Solver::unitPropagate(Literal l){
+        for (ClausePointer &c : watchedBy.at(l.get())){
+            short r = c->getRank(l);
+            size_t start = c->getIndex(r);
+            size_t i = c->getIndex(r);
+            Literal p = (*c)[c->getIndex(1-r)];
+            if (!satisfied(p)){
+                while (true) {
+                    i++;
+                    if (i == c->size()){
+                        i=0;
+                    }
+                    if (i == start){
+                        break;
+                    }
+                    if ((*c)[i] != p){
+                        if (!falsified((*c)[i])){
+                            c->setWatcher((*c)[i], r);
+                            break;
+                        }
+                    }
+                }
+                if (i == start){
+                    if (falsified(p)) {
+                        return false;
+                    }
+                    assign(p);
+                }
+            }
+        }
+        return true;
+    }
+
+
     bool Solver::unitPropagate() {
-        throw NOT_IMPLEMENTED;
+        size_t toPropagate = 0;
+        while (toPropagate < unitLiterals.size()){
+            Literal l = unitLiterals[toPropagate].negate();
+            bool propagate = unitPropagate(l);
+            if (!propagate) {
+                return false;
+            }
+            toPropagate += 1;
+        }
+        return true;
     }
 } // sat

@@ -110,7 +110,7 @@ TEST(solver, rebase) {
     Solver s(3);
     auto clauses = {Clause({neg(1), pos(0), neg(2)}), Clause({neg(1), pos(2)}), Clause({neg(0), neg(2)})};
     for (const auto &clause : clauses) {
-        ASSERT_TRUE(s.addClause(clause));
+        ASSERT_TRUE(s.addClause(clause)); 
     }
 
     ASSERT_TRUE(s.assign(pos(0)));
