@@ -13,6 +13,9 @@ namespace sat {
     Solver::Solver(unsigned numVariables) {
         std::vector<TruthValue> mod(numVariables, sat::TruthValue::Undefined);
         model = mod;
+        std::vector<std::vector<ClausePointer>> wb(numVariables*2);
+        watchedBy = wb;
+
     }   
 
     bool Solver::addClause(Clause clause) {
